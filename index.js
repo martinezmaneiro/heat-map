@@ -45,7 +45,9 @@ let drawAxes =()=> {
     let xAxis = d3.axisBottom(xScale)
                     /*the following line formats the data so that it displays as an integer*/
                     .tickFormat(d3.format('d'));
-    let yAxis = d3.axisLeft(yScale);
+    let yAxis = d3.axisLeft(yScale)
+                    /*the '%B' tells the function to show the full month as a string*/
+                    .tickFormat(d3.timeFormat('%B'))
 
     svg.append('g')
             .call(xAxis)
