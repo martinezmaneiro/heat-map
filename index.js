@@ -48,7 +48,20 @@ let drawCells =()=> {
         .data(values)
         .enter()
         .append('rect')
-        .attr('class', 'cell');
+        .attr('class', 'cell')
+        /*rect fill color conditional styling*/
+        .attr('fill', (item) => {
+            variance = item.variance;
+            if (variance <= -1){
+                return 'SteelBlue'
+            }else if(variance <= 0){
+                return 'LightSteelBlue'
+            }else if(variance <= 1){
+                return 'Orange'
+            }else{
+                return 'Crimson'}
+        })
+
 }
 
 /*used the open method to set the XMLHttpRequest. The first argument is the 'GET' method
