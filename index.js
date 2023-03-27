@@ -24,6 +24,7 @@ let generateScales =()=> {
                 .range([padding, width - padding]);
 
     yScale = d3.scaleTime()
+                .domain([new Date(0, 0, 0, 0, 0, 0, 0), new Date(0, 12, 0, 0, 0, 0, 0)])
                 .range([padding, height - padding]);
 };
 /*x and y axes drawing & positioning*/
