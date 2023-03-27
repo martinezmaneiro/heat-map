@@ -6,14 +6,31 @@ let values = [];
 
 let width = 1200;
 let height = 600;
-let padding = 600;
+let padding = 60;
+
+let xScale;
+let yScale;
 
 /*the html element svg selector. Then variables defined above were used to give width and height attributes*/
-let canvas = d3.select('#canvas');
+let svg = d3.select('#canvas');
 let drawCanvas =()=> {
-    canvas.attr('width', width);
-    canvas.attr('height', height);
+    svg.attr('width', width);
+    svg.attr('height', height);
 };
+
+let generateScales =()=> {
+    /*graph x and y scales*/
+    xScale = d3.scaleLinear()
+                .range([padding, width - padding]);
+};
+
+let drawAxes =()=> {
+    let xAxis = d3.axisBottom(xScale);
+
+    svg.append('g')
+            .call(xAxis)
+};
+
 
 /*used the open method to set the XMLHttpRequest. The first argument is the 'GET' method
 as we are fetching info from an url (which is the second argument). The third argument
@@ -23,9 +40,11 @@ req.open('GET', url, true);
 javascript object. Then we assing data values to the variables baseTemp and values*/
 req.onload =()=>{
     let data = JSON.parse(req.responseText);
-    baseTemp = data['baseTemperature'];
-    values = data['monthlyVariance'];
-    drawCanvas()
+    baseTemp = data.baseTemperature;
+    values = data.monthlyVariance;
+    drawCanvas();
+    generateScales();
+    drawAxes();
 }
 /*this method sends the request*/
 req.send();
