@@ -32,7 +32,8 @@ let generateScales =()=> {
 
     /*graph x and y scales*/
     xScale = d3.scaleLinear()
-                .domain([minYear, maxYear])
+                /*added +1 to maxYear value so that the graph contains all the data (because some data is from 2015)*/
+                .domain([minYear, maxYear +1])
                 .range([padding, width - padding]);
 
     yScale = d3.scaleTime()
@@ -88,6 +89,13 @@ let drawCells =()=> {
         /*converting the month value into a JS Date object to give it an appropiate (ranged) y value */
         .attr('y', item => {
             return yScale(new Date(0, item.month -1, 0, 0, 0, 0, 0))})
+        /*setting the rectangle width*/
+        .attr('width', item => {
+            let numberOfYears = maxYear - minYear;
+            return (width - (2*padding)) / numberOfYears;
+        })
+        /*setting the x value for every item*/
+        .attr('x', item => {return xScale(item.year)})
 }
 
 /*used the open method to set the XMLHttpRequest. The first argument is the 'GET' method
