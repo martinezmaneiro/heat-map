@@ -42,6 +42,14 @@ let drawAxes =()=> {
         .attr('transform', 'translate(' + padding +', 0)');
 };
 
+/*when called, this function will draw a cell for every entry value we got from the fetch*/
+let drawCells =()=> {
+    svg.selectAll('rect')
+        .data(values)
+        .enter()
+        .append('rect')
+        .attr('class', 'cell');
+}
 
 /*used the open method to set the XMLHttpRequest. The first argument is the 'GET' method
 as we are fetching info from an url (which is the second argument). The third argument
@@ -56,6 +64,7 @@ req.onload =()=>{
     drawCanvas();
     generateScales();
     drawAxes();
+    drawCells();
 }
 /*this method sends the request*/
 req.send();
