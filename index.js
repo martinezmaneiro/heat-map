@@ -70,6 +70,10 @@ let drawCells =()=> {
         .attr('data-temp', item => {
             return baseTemp + item.variance
         })
+        .attr('height', (height - (2 * padding)) / 12)
+        /*converting the month value into a JS Date object to give it an appropiate (ranged) y value */
+        .attr('y', item => {
+            return yScale(new Date(0, item.month -1, 0, 0, 0, 0, 0))})
 }
 
 /*used the open method to set the XMLHttpRequest. The first argument is the 'GET' method
