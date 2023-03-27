@@ -8,6 +8,9 @@ let width = 1200;
 let height = 600;
 let padding = 60;
 
+let minYear;
+let maxYear;
+
 let xScale;
 let yScale;
 
@@ -19,8 +22,17 @@ let drawCanvas =()=> {
 };
 
 let generateScales =()=> {
+    /*setters for min and max year. This values will be used to set the domain of the x scale*/
+    minYear = d3.min(values, (item) =>{
+        return item.year
+    })
+    maxYear = d3.max(values, (item) =>{
+        return item.year
+    })
+
     /*graph x and y scales*/
     xScale = d3.scaleLinear()
+                .domain([minYear, maxYear])
                 .range([padding, width - padding]);
 
     yScale = d3.scaleTime()
