@@ -41,7 +41,9 @@ let generateScales =()=> {
 };
 /*x and y axes drawing & positioning*/
 let drawAxes =()=> {
-    let xAxis = d3.axisBottom(xScale);
+    let xAxis = d3.axisBottom(xScale)
+                    /*the following line formats the data so that it displays as an integer*/
+                    .tickFormat(d3.format('d'));
     let yAxis = d3.axisLeft(yScale);
 
     svg.append('g')
