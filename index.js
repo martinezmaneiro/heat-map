@@ -62,8 +62,13 @@ let drawCells =()=> {
                 return 'Crimson'}
         })
         /*attributes added for user story 7*/
-        .attr('data-year', item => {return item})
-        .attr('data-month', item => {return item})
+        .attr('data-year', item => {return item.year})
+        /*the user story does not pass the test if we do not substract 1 (for those items with a value of 12)*/
+        .attr('data-month', item => {return item.month -1})
+        /*in this case we have to get the temperature from baseTemp and variance*/
+        .attr('data-temp', item => {
+            return baseTemp + item.variance
+        })
 }
 
 /*used the open method to set the XMLHttpRequest. The first argument is the 'GET' method
