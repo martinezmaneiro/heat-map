@@ -61,7 +61,9 @@ let drawCells =()=> {
             }else{
                 return 'Crimson'}
         })
-
+        /*attributes added for user story 7*/
+        .attr('data-year', item => {return item})
+        .attr('data-month', item => {return item})
 }
 
 /*used the open method to set the XMLHttpRequest. The first argument is the 'GET' method
